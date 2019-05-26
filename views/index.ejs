@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <title></title>
+
+        <style>
+            body {
+                background-color: white;
+            }
+
+            h1 {
+               font-size: 128pt;
+               text-align: center; 
+
+            <% if(id == 0){ %>
+                color: green;
+            <% } else if(id == 1) { %>  
+                color: red;
+            <% } %>
+            }
+
+            #img {
+                display:block;
+                margin: 300px auto;
+                width: 400px;
+            }
+
+            #logo {
+                width: 200px;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+            }
+
+            #clock {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+            }
+
+            #footer_img {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 100px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1><%= title %></h1>
+        <h1></h1>
+        <img src="<%= imgURL %>" id="img">      
+        <img src="img/logo.png" id="logo">
+        <canvas id="clock" width="400" height="400"> Dieser Browser wird leider nicht unterstützt. </canvas>
+
+        <div>
+            <img src="img/ltsp_ubuntu.jpg" id="footer_img">
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="/station-clock.js"></script>
+        <script type="text/javascript">
+
+            var clock = new StationClock("clock");
+            clock.body = StationClock.SmallWhiteBody;
+            clock.dial = StationClock.SwissStrokeDial;
+            clock.hourHand = StationClock.PointedHourHand;
+            clock.minuteHand = StationClock.PointedMinuteHand;
+            clock.secondHand = StationClock.HoleShapedSecondHand;
+            clock.boss = StationClock.NoBoss;
+            clock.minuteHandBehavoir = StationClock.CreepingMinuteHand;
+            clock.secondHandBehavoir = StationClock.ElasticBouncingSecondHand;
+
+            window.setInterval(function() { clock.draw() }, 50);
+
+            $(document).on('keypress',function(e) {
+                var keycode = (e.keyCode ? e.keyCode : e.which);
+                console.log(keycode);
+                switch(keycode) 
+                {
+                    case 48: // 0
+                        window.location = "/?id=0";
+                        break;
+                    case 49: // 1
+                        window.location = "/?id=1";
+                        break;
+                    case 50: // 2
+                        window.location = "/?id=2";
+                        break;
+                    case 51: // 3
+                        window.location = "/?id=3";
+                        break;
+                    case 52: // 4
+                        window.location = "/?id=4";
+                        break;
+                    case 53: // 5
+                        window.location = "/?id=5";
+                        break;
+                    case 54: // 6
+                        window.location = "/?id=6";
+                        break;
+                    case 55: // 7
+                        window.location = "/?id=7";
+                        break;
+                    case 55: // 8
+                        window.location = "/?id=8";
+                        break;
+                    case 55: // 9
+                        window.location = "/?id=9";
+                        break;
+                };   
+            });
+        </script>
+    </body>
+</html>
