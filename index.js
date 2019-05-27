@@ -19,6 +19,28 @@ app.get('/', function (req, res) {
   if(req.query.id != undefined) {
     id = req.query.id;
   }
+  
+  if(id = 'e') {
+    
+    var kursscript = exec('pwd',
+            (error, stdout, stderr) => {
+                console.log(stdout);
+                console.log(stderr);
+                if (error !== null) {
+                    console.log(`exec error: ${error}`);
+                }
+        });
+  }else if(id = 'd') {
+    
+    var kursscript = exec('pwd',
+            (error, stdout, stderr) => {
+                console.log(stdout);
+                console.log(stderr);
+                if (error !== null) {
+                    console.log(`exec error: ${error}`);
+                }
+            });
+  }
    
   res.render('index.ejs', {id: id, title: dataset[id].title, imgURL: dataset[id].imgURL});
 });
