@@ -1,0 +1,63 @@
+{
+    "tabledata": [
+        [1,1],
+        [1,1],
+        [1,0],
+        [1,1],
+        [1,1]
+    ],
+    "states": [
+        {
+            "name": "Open",
+            "logo": {
+                "visibility": 1
+            },
+            "clock": {
+                "visibility": 1,
+                "timezone": ""
+            },
+            "table": {
+                "visibility": 1
+            },
+            "main": {
+                "html": "<img src=\"img/open.png\" id=\"mainimg\">",
+                "css": "",
+                "js": ""
+            }
+        },{
+            "name": "Closed",
+            "logo": {
+                "visibility": 1
+            },
+            "clock": {
+                "visibility": 1,
+                "timezone": ""
+            },
+            "table": {
+                "visibility": 1
+            },
+            "main": {
+                "html": "<img src=\"img/closed.png\" id=\"mainimg\">",
+                "css": "",
+                "js": ""
+            }
+        },{
+            "name": "Belegt",
+            "logo": {
+                "visibility": 1
+            },
+            "clock": {
+                "visibility": 1,
+                "timezone": ""
+            },
+            "table": {
+                "visibility": 1
+            },
+            "main": {
+                "html": "<h1 id=\"heading\">Belegt</h1>",
+                "css": "#heading { color: blue; font-size: 160pt; }",
+                "js": ""
+            }
+        }
+    ]
+}

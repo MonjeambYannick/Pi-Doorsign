@@ -1,60 +1,48 @@
 const express = require('express');
 const ejs = require('ejs');
 const exec = require('child_process').exec;
+const fs = require('fs');
 
-var app = express();
+let app = express();
 
-const port = 3000;
+const port = 3030;
 
-var dataset = {0: {title: "Open", imgURL: "/img/open.png"}, 1: {title: "Closed", imgURL: "/img/closed.png"}, 2: {title: "Belegt", imgURL:""}};
+const data = JSON.parse(fs.readFileSync('data.json'));
 
-//
-app.use(express.static('public'))
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
 
-// html render engine set to ejs
-app.set('view engine', 'ejs'); 
+app.get('/', function(req, res) {
+    var id = 0;
+    if(req.query.id != undefined) {
+      if(req.query.id < data.states.length) {
+        id = req.query.id;
+      }
+    }
 
-app.get('/', function (req, res) {
-  var id = 0;
-  if(req.query.id != undefined) {
-    id = req.query.id;
-  }
-  
-  if(id = 'e') {
-    
-    var kursscript = exec('pwd',
-            (error, stdout, stderr) => {
-                console.log(stdout);
-                console.log(stderr);
-                if (error !== null) {
-                    console.log(`exec error: ${error}`);
-                }
-        });
-  }else if(id = 'd') {
-    
-    var kursscript = exec('pwd',
-            (error, stdout, stderr) => {
-                console.log(stdout);
-                console.log(stderr);
-                if (error !== null) {
-                    console.log(`exec error: ${error}`);
-                }
-            });
-  }
-   
-  res.render('index.ejs', {id: id, title: dataset[id].title, imgURL: dataset[id].imgURL});
+    if(id == 'e') {
+      KursAccounts(true);
+    } else if(id == 'd') {
+
+    } else {
+      res.render('index.ejs', {tabledata: data.tabledata, name: data.states[id].name, logo: data.states[id].logo, clock: data.states[id].clock, table: data.states[id].table, main: data.states[id].main})
+    }
+
 });
 
-// starting server
-app.listen(port, function () {
-  console.log('Example app listening on port ' + port + '...');
+app.get('/edit', function(req, res) {
+  res.send('Livia ist Cool !!') 
+  //res.render('edit.ejs');
 });
 
-var kursscript = exec('pwd',
-        (error, stdout, stderr) => {
-            console.log(stdout);
-            console.log(stderr);
-            if (error !== null) {
-                console.log(`exec error: ${error}`);
-            }
-        });
+app.listen(port, function() {
+    console.log('Server listening on Port: ' + port);
+});
+
+function KursAccounts(state) {
+  if(state) {
+    exec('echo state');
+  }else {
+    exec('echo state');
+  }
+}

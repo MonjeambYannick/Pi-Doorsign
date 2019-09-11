@@ -1,62 +1,108 @@
+
 <html>
     <head>
         <title></title>
-
         <style>
-            body {
-                background-color: white;
-            }
+                body {
+                    background-color: white;
+                }
 
-            h1 {
-               font-size: 128pt;
-               text-align: center; 
+                #main {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
 
-            <% if(id == 0){ %>
-                color: green;
-            <% } else if(id == 1) { %>  
-                color: red;
-            <% } %>
-            }
+                <%- main.css %>
+    
+                #logo {
+                    width: 200px;
+                    position: fixed;
+                    top: 20px;
+                    left: 20px;
+                    <%if (logo.visibility == 0) { %>
+                        visibility: hidden;
+                    <% } %>
+                }
+    
+                #clock {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    <%if (clock.visibility == 0) { %>
+                        visibility: hidden;
+                    <% } %>
+                }
+    
+                #table {
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    color: black;
+                    font-size: 22px;
+                    border: 1px solid black;
+                    <%if (table.visibility == 0) { %>
+                        visibility: hidden;
+                    <% } %>
+                }
+                #table th:first {
+                    border: none;
+                } 
+                #table th {
+                    border: 1px solid black;
+                }
+                #table td.open {
+                    background:chartreuse;
+                }
+                #table td {
+                    background: red;
+                }
 
-            #img {
-                display:block;
-                margin: 300px auto;
-                width: 400px;
-            }
 
-            #logo {
-                width: 200px;
-                position: fixed;
-                top: 20px;
-                left: 20px;
-            }
-
-            #clock {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-            }
-
-            #footer_img {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                bottom: 100px;
-            }
-        </style>
+            </style>
     </head>
-
     <body>
-        <h1><%= title %></h1>
-        <h1></h1>
-        <img src="<%= imgURL %>" id="img">      
+        <table id="table" border="1">
+            <tr>
+                <th></th>
+                <th>Montag</th>
+                <th>Dienstag</th>
+                <th>Mitwoch</th>
+                <th>Donnerstag</th>
+                <th>Freitag</th>
+            </tr>
+            <tr>
+                <th>Frühstückspause</th>
+                <% for (var i = 0; i < 5;  i++) { %>
+                    <% if (tabledata[i][0] == 1) {%>
+                        <td class="open">Geöffnet</td>
+                    <% } else { %>
+                        <td class="">Geschlossen</td>
+                    <% } %>
+                <% } %>
+            </tr>
+            <tr>
+                <th>Mittagspause</th>
+                <% for (var i = 0; i < 5;  i++) { %>
+                    <% if (tabledata[i][1] == 1) {%>
+                        <td class="open">Geöffnet</td>
+                    <% } else { %>
+                        <td class="">Geschlossen</td>
+                    <% } %>
+                <% } %>
+            </tr>
+        </table>
+
+        
+        <div id="main">
+            <%- main.html %>
+        </div>
+
+
         <img src="img/logo.png" id="logo">
         <canvas id="clock" width="400" height="400"> Dieser Browser wird leider nicht unterstützt. </canvas>
 
-        <div>
-            <img src="img/ltsp_ubuntu.jpg" id="footer_img">
-        </div>
-        
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/station-clock.js"></script>
         <script type="text/javascript">
@@ -73,42 +119,12 @@
 
             window.setInterval(function() { clock.draw() }, 50);
 
+            <%- main.js %>
+
             $(document).on('keypress',function(e) {
                 var keycode = (e.keyCode ? e.keyCode : e.which);
                 console.log(keycode);
-                switch(keycode) 
-                {
-                    case 48: // 0
-                        window.location = "/?id=0";
-                        break;
-                    case 49: // 1
-                        window.location = "/?id=1";
-                        break;
-                    case 50: // 2
-                        window.location = "/?id=2";
-                        break;
-                    case 51: // 3
-                        window.location = "/?id=3";
-                        break;
-                    case 52: // 4
-                        window.location = "/?id=4";
-                        break;
-                    case 53: // 5
-                        window.location = "/?id=5";
-                        break;
-                    case 54: // 6
-                        window.location = "/?id=6";
-                        break;
-                    case 55: // 7
-                        window.location = "/?id=7";
-                        break;
-                    case 55: // 8
-                        window.location = "/?id=8";
-                        break;
-                    case 55: // 9
-                        window.location = "/?id=9";
-                        break;
-                };   
+                window.location = "/?id=" + String.fromCharCode(keycode) + "";
             });
         </script>
     </body>
