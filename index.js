@@ -23,7 +23,7 @@ app.get('/', function(req, res) {
     if(id == 'e') {
       KursAccounts(true);
     } else if(id == 'd') {
-
+      KursAccounts(false);
     } else {
       res.render('index.ejs', {tabledata: data.tabledata, name: data.states[id].name, logo: data.states[id].logo, clock: data.states[id].clock, table: data.states[id].table, main: data.states[id].main})
     }
@@ -42,7 +42,9 @@ app.listen(port, function() {
 function KursAccounts(state) {
   if(state) {
     exec('echo state');
+    exec('sudo bash /slz/scripts/kurs.sh ON')
   }else {
     exec('echo state');
+    exec('sudo bash /slz/scripts/kurs.sh OFF')
   }
 }
